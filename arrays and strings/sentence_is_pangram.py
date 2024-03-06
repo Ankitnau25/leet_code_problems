@@ -126,6 +126,13 @@ class TextChunker:
     def chunk_by_word(self):
         words = self.text.split()
         return words
+# aws:
+#   access_key_id: YOUR_ACCESS_KEY_ID
+#   secret_access_key: YOUR_SECRET_ACCESS_KEY
+#   endpoint_url: https://s3.eu-central-1.amazonaws.com
+# s3:  
+#   bucket_name: YOUR_BUCKET_NAME
+#   region_name: eu-central-1
 
     def chunk_by_character(self):
         characters = list(self.text)
