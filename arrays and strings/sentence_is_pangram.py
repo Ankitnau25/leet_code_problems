@@ -68,21 +68,37 @@ documents = ingestor.ingest()
 ingestor = DocumentIngestor(source_type="s3", source_path="s3://my-bucket/documents")
 documents = ingestor.ingest()
 
+
+import json
 from unstructured.partition.auto import partition
 from unstructured.partition.pdf import partition_pdf
 from unstructured.partition.ppt import partition_ppt
 from unstructured.partition.ppt import partition_pptx
 from unstructured.partition.docx import partition_docx
 from unstructured.partition.doc import partition_doc
+from unstructured.staging.base import elements_to_json
+from unstructured.chunking.basic import chunk_elements
+from unstructured.chunking.title import chunk_by_title
+
+class TextChunker:
+    def __init__(self, elements):
+        self.elements = elements
+
+    def chunk_by_tilte(self):
+        return chunk_by_title(self.elements)
+
+    def chunk_elements(self):
+        return chunk_elements(self.elements)
+
 
 class TextExtractor:
     def __init__(self, file_path):
         self.file_path = file_path
 
     def extract_text(self):
-        if self.file_path.endswith(".pdf"):
+        if self.file_path.name.endswith(".pdf"):
             return partition_pdf(
-                          filename="path/to/your/pdf_file.pdf",                  # mandatory
+                          filename=self.file_path,                  # mandatory
                           strategy="hi_res",                                     # mandatory to use ``hi_res`` strategy
                           extract_images_in_pdf=True,                            # mandatory to set as ``True``
                           extract_image_block_types=["Image", "Table"],          # optional
@@ -90,50 +106,41 @@ class TextExtractor:
                           extract_image_block_output_dir="path/to/save/images",  # optional - only works when ``extract_image_block_to_payload=False``
                           )
 
-        elif self.file_path.endswith(".docx"):
+        elif self.file_path.name.endswith(".docx"):
             return partition_docx(self.file_path)
 
-        elif self.file_path.endswith(".doc"):
+        elif self.file_path.name.endswith(".doc"):
             return partition_doc(self.file_path)
 
-        elif self.file_path.endswith(".ppt"):  
+        elif self.file_path.name.endswith(".ppt"):
             return partition_doc(self.file_path)
 
-        elif self.file_path.endswith(".pptx"):
+        elif self.file_path.name.endswith(".pptx"):
             return partition_pptx(self.file_path )
 
         else:
             return partition(self.file_path)
 
-# Example usage:
-unstructured_io = UnstructuredIO("/content/document.pdf")
-text = unstructured_io.extract_text()
-print(text)
-
-class TextChunker:
-    def __init__(self, text):
-        self.text = text
-
-    def chunk_by_sentence(self):
-        import nltk
-        sentences = nltk.sent_tokenize(self.text)
-        return sentences
-
-    def chunk_by_paragraph(self):
-        paragraphs = self.text.split("\n\n")
-        return paragraphs
-
-    def chunk_by_word(self):
-        words = self.text.split()
-        return words
-# aws:
-#   access_key_id: YOUR_ACCESS_KEY_ID
-#   secret_access_key: YOUR_SECRET_ACCESS_KEY
-#   endpoint_url: https://s3.eu-central-1.amazonaws.com
-# s3:  
-#   bucket_name: YOUR_BUCKET_NAME
-#   region_name: eu-central-1
-
-    def chunk_by_character(self):
-        characters = list(self.text)
-        return characters
+    def extract_title_meta_data(self,elements):
+        li_title = []
+        li_elements = json.loads(elements_to_json(elements))
+        for elem in  li_elements:
+                if elem['type'] == 'Title':
+                    li_title.append(elem['text'])
+        filename = li_elements[0]['metadata']['filename']
+        filetype = li_elements[0]['metadata']['filetype']
+        meta_dict = {'title_list':li_title,
+                    'filename': 'table.pdf',
+                    'filetype': 'application/pdf'}
+        return meta_dict
+        
+ingestor = DocumentIngestor(source_type="folder", source_path="/content/data")
+doc_dir = ingestor.ingest()
+for file_ in os.listdir(doc_dir):
+    file_path = doc_dir.joinpath(file_)
+    if file_path.is_file():
+      te_obj =  TextExtractor(file_path)
+      elements = te_obj.extract_text()
+      output = te_obj.extract_title_meta_data(elements)
+      chunks = TextChunker(elements).chunk_by_tilte()
+      output['chunks'] = json.loads(elements_to_json(chunks))
