@@ -1,0 +1,194 @@
+{
+  "queries": [
+    {
+      "query": "What are the benefits of health insurance?",
+      "paragraphs": [
+        {
+          "id": 1,
+          "text": "Health insurance provides financial coverage for medical expenses such as doctor visits, hospital stays, and medications.",
+          "related": true
+        },
+        {
+          "id": 2,
+          "text": "Life insurance policies pay a lump sum to beneficiaries upon the policyholder's death.",
+          "related": false
+        },
+        {
+          "id": 3,
+          "text": "With health insurance, you can access preventive services like vaccinations and screenings at no additional cost.",
+          "related": true
+        },
+        {
+          "id": 4,
+          "text": "Car insurance covers damages to your vehicle in case of an accident.",
+          "related": false
+        },
+        {
+          "id": 5,
+          "text": "Health insurance plans often cover a range of treatments, including surgeries and emergency care.",
+          "related": true
+        }
+      ]
+    },
+    {
+      "query": "How does travel insurance work?",
+      "paragraphs": [
+        {
+          "id": 1,
+          "text": "Travel insurance provides coverage for trip cancellations, medical emergencies, and lost luggage.",
+          "related": true
+        },
+        {
+          "id": 2,
+          "text": "Home insurance policies protect against damages to your property from incidents like fire and theft.",
+          "related": false
+        },
+        {
+          "id": 3,
+          "text": "Travel insurance can also cover flight delays and interruptions, ensuring you get reimbursed for additional expenses.",
+          "related": true
+        },
+        {
+          "id": 4,
+          "text": "Car insurance premiums vary based on factors like age, driving record, and type of vehicle.",
+          "related": false
+        },
+        {
+          "id": 5,
+          "text": "If you fall ill or get injured while traveling, travel insurance can help cover your medical bills.",
+          "related": true
+        },
+        {
+          "id": 6,
+          "text": "Life insurance is designed to provide financial support to your family after your death.",
+          "related": false
+        },
+        {
+          "id": 7,
+          "text": "Some travel insurance policies include coverage for emergency evacuations and repatriation.",
+          "related": true
+        },
+        {
+          "id": 8,
+          "text": "Health insurance covers routine medical care as well as emergency services.",
+          "related": false
+        },
+        {
+          "id": 9,
+          "text": "You can purchase travel insurance as a standalone policy or as part of a travel package.",
+          "related": true
+        },
+        {
+          "id": 10,
+          "text": "Renters insurance protects your personal belongings in a rental property.",
+          "related": false
+        }
+      ]
+    },
+    {
+      "query": "What does car insurance typically cover?",
+      "paragraphs": [
+        {
+          "id": 1,
+          "text": "Car insurance typically covers damages to your vehicle in the event of an accident.",
+          "related": true
+        },
+        {
+          "id": 2,
+          "text": "Health insurance helps pay for medical expenses like doctor visits and prescriptions.",
+          "related": false
+        },
+        {
+          "id": 3,
+          "text": "Comprehensive car insurance covers damages from non-collision incidents such as theft, fire, and natural disasters.",
+          "related": true
+        },
+        {
+          "id": 4,
+          "text": "Home insurance covers structural damage to your house and personal property.",
+          "related": false
+        },
+        {
+          "id": 5,
+          "text": "Liability coverage in car insurance pays for damages and injuries you cause to others in an accident.",
+          "related": true
+        },
+        {
+          "id": 6,
+          "text": "Life insurance provides a death benefit to your beneficiaries when you pass away.",
+          "related": false
+        },
+        {
+          "id": 7,
+          "text": "Uninsured motorist coverage protects you if you're in an accident with a driver who doesn't have insurance.",
+          "related": true
+        },
+        {
+          "id": 8,
+          "text": "Travel insurance helps cover unexpected trip-related expenses like cancellations and medical emergencies.",
+          "related": false
+        },
+        {
+          "id": 9,
+          "text": "Personal injury protection (PIP) in car insurance covers medical expenses for you and your passengers.",
+          "related": true
+        },
+        {
+          "id": 10,
+          "text": "Renters insurance covers your personal belongings in a rental unit.",
+          "related": false
+        },
+        {
+          "id": 11,
+          "text": "Collision coverage pays for damages to your car resulting from a collision with another vehicle or object.",
+          "related": true
+        },
+        {
+          "id": 12,
+          "text": "Pet insurance helps cover veterinary expenses for your pets.",
+          "related": false
+        },
+        {
+          "id": 13,
+          "text": "Gap insurance covers the difference between the actual cash value of your car and the amount you owe on your loan.",
+          "related": true
+        },
+        {
+          "id": 14,
+          "text": "Disability insurance provides income replacement if you're unable to work due to illness or injury.",
+          "related": false
+        },
+        {
+          "id": 15,
+          "text": "Roadside assistance in car insurance helps with services like towing, battery jump-starts, and flat tire changes.",
+          "related": true
+        },
+        {
+          "id": 16,
+          "text": "Dental insurance covers routine dental care as well as major procedures.",
+          "related": false
+        },
+        {
+          "id": 17,
+          "text": "Glass coverage in car insurance pays for repairs or replacement of your car's windows and windshield.",
+          "related": true
+        },
+        {
+          "id": 18,
+          "text": "Health insurance plans vary widely in terms of coverage and costs.",
+          "related": false
+        },
+        {
+          "id": 19,
+          "text": "Rental car coverage in car insurance pays for a rental car while your vehicle is being repaired.",
+          "related": true
+        },
+        {
+          "id": 20,
+          "text": "Flood insurance is essential for properties in flood-prone areas.",
+          "related": false
+        }
+      ]
+    }
+  ]
+}
