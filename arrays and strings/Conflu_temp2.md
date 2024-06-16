@@ -1,4 +1,25 @@
-Reranker Experimentation SummaryDataset DescriptionOur dataset consists of a set of queries and their corresponding paragraphs. Each paragraph is labeled as either "related" or "not related" to the query. The dataset is organized as follows:Total Queries: 3Total Paragraphs:Query 1: 5 paragraphsQuery 2: 19 paragraphsQuery 3: 20 paragraphsEach paragraph contains an ID, the paragraph text, and a "related" flag indicating its relevance to the query.Example Query and Paragraphs:{
+Sure, here's the updated Confluence page with the additional details and links:
+
+---
+
+### Reranker Experimentation Summary
+
+#### Dataset Description
+
+Our dataset consists of a set of queries and their corresponding paragraphs. Each paragraph is labeled as either "related" or "not related" to the query. The dataset is organized as follows:
+
+- **Total Queries**: 3
+- **Total Paragraphs**:
+  - **Query 1**: 5 paragraphs
+  - **Query 2**: 19 paragraphs
+  - **Query 3**: 20 paragraphs
+
+Each paragraph contains an ID, the paragraph text, and a "related" flag indicating its relevance to the query.
+
+**Example Query and Paragraphs**:
+
+```json
+{
   "query": "What are the benefits of health insurance?",
   "paragraphs": [
     {
@@ -27,4 +48,57 @@ Reranker Experimentation SummaryDataset DescriptionOur dataset consists of a set
       "related": true
     }
   ]
-}Experimentation DetailsWe tested several rerankers to evaluate their accuracy and response time. The rerankers tested were:ColBERTBGEFlashRankZsMiniLLMFlashRankFlanT5Each query and its related paragraphs were sent at once to the different models for reranking.The experimentation was carried out on a Databricks notebook with the following configuration:Databricks Runtime Version: [Insert Version]Cluster Configuration:Driver Type: [Insert Driver Type]Worker Type: [Insert Worker Type]Number of Workers: [Insert Number of Workers]The code for the experimentation is available on Bitbucket. You can find the code here.Results SummaryThe performance of each reranker was measured in terms of response time and reranker score. Below is a summary of the findings:FlashRankZsMiniLLM and BGE were found to be the most accurate rerankers.FlashRankZsMiniLLM was the fastest reranker.Detailed Results:ColBERTResponse Time: [Insert Response Time]Reranker Score: [Insert Score]BGEResponse Time: [Insert Response Time]Reranker Score: [Insert Score]FlashRankZsMiniLLMResponse Time: [Insert Response Time]Reranker Score: [Insert Score]FlashRankFlanT5Response Time: [Insert Response Time]Reranker Score: [Insert Score]ConclusionBased on the results of our experimentation, FlashRankZsMiniLLM is recommended for scenarios where both accuracy and speed are crucial. BGE also performs well in terms of accuracy and can be considered as an alternative.
+}
+```
+
+#### Experimentation Details
+
+We tested several rerankers to evaluate their accuracy and response time. The rerankers tested were:
+- **ColBERT**
+- **BGE**
+- **FlashRankZsMiniLLM**
+- **FlashRankFlanT5**
+
+Each query and its related paragraphs were sent at once to the different models for reranking.
+
+The experimentation was carried out on a Databricks notebook with the following configuration:
+- **Databricks Runtime Version**: [Insert Version]
+- **Cluster Configuration**:
+  - **Driver Type**: [Insert Driver Type]
+  - **Worker Type**: [Insert Worker Type]
+  - **Number of Workers**: [Insert Number of Workers]
+
+The code for the experimentation is available on Bitbucket. You can find the code [here](https://bitbucket.org/your-repository-link).
+
+#### Results Summary
+
+The performance of each reranker was measured in terms of response time and reranker score. Below is a summary of the findings:
+
+- **FlashRankZsMiniLLM** and **BGE** were found to be the most accurate rerankers.
+- **FlashRankZsMiniLLM** was the fastest reranker.
+
+**Detailed Results**:
+
+1. **ColBERT**
+   - **Response Time**: [Insert Response Time]
+   - **Reranker Score**: [Insert Score]
+
+2. **BGE**
+   - **Response Time**: [Insert Response Time]
+   - **Reranker Score**: [Insert Score]
+
+3. **FlashRankZsMiniLLM**
+   - **Response Time**: [Insert Response Time]
+   - **Reranker Score**: [Insert Score]
+
+4. **FlashRankFlanT5**
+   - **Response Time**: [Insert Response Time]
+   - **Reranker Score**: [Insert Score]
+
+#### Conclusion
+
+Based on the results of our experimentation, **FlashRankZsMiniLLM** is recommended for scenarios where both accuracy and speed are crucial. **BGE** also performs well in terms of accuracy and can be considered as an alternative.
+
+---
+
+This template now includes details about the experimentation environment, configuration, and a link to the Bitbucket repository containing the code. Make sure to fill in the specific runtime version, cluster configuration details, response times, and reranker scores.
