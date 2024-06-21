@@ -1,3 +1,11 @@
+
+Generate a reranker dataset with 3 queries related to the insurance domain. The dataset should include the following details:
+
+Query 1: 5 paragraphs
+Query 2: 10 paragraphs
+Query 3: 20 paragraphs
+Each query should be followed by paragraphs identified by an ID, containing text, and marked as either related or not related to the query. Ensure the paragraphs cover relevant insurance topics and include both related and unrelated content
+
 Sure, here's the updated Confluence page with the additional details and links:
 
 ---
