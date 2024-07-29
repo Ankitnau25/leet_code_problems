@@ -1,5 +1,51 @@
-## Project Description
+from pydantic import BaseModel, Field, ValidationError
+from typing import List, Optional
 
-This project implements a Retrieval-Augmented Generation (RAG) workflow, allowing users to preprocess their documents and then ask questions based on the processed documents. The preprocessing module handles converting PDFs to DOCX (if possible), chunking the documents, and extracting metadata using the Unstructured library, LlamaIndex, and Mistral. The processed chunks and metadata are stored in a Delta table for efficient retrieval and querying.
+class Example(BaseModel):
+    input: str = Field(..., description="Example input text.")
+    output: str = Field(..., description="Expected output text.")
 
-The inference module deploys these functionalities as a Databricks endpoint. Users can query the processed data, and the system uses a combination of query intent and retrieval strategies to provide relevant responses. The RAG workflow ensures that user queries are augmented with retrieved information from the document chunks to generate accurate and contextually relevant answers.
+class QuestionGenerationPrompt(BaseModel):
+    instructions: str = Field(..., description="Instructions for the prompt.")
+    contexts: List[str] = Field(..., description="List of context chunks.")
+    input_format: str = Field(..., description="Format for the input.")
+    output_format: str = Field(..., description="Format for the output.")
+    examples: Optional[List[Example]] = Field([], description="List of input-output examples.")
+
+    def build_prompt(self) -> str:
+        examples_str = "\n".join([f"Input: {ex.input}\nOutput: {ex.output}" for ex in self.examples])
+        contexts_str = "\n".join([f"Context: {ctx}" for ctx in self.contexts])
+        prompt_str = (
+            f"{self.instructions}\n\n"
+            f"Contexts:\n{contexts_str}\n\n"
+            f"Examples:\n{examples_str}\n\n"
+            f"Input: {self.input_format}\n"
+            f"Output: {self.output_format}"
+        )
+        return prompt_str
+
+# Example data
+example_data = {
+    "instructions": "Generate a question from the following contexts.",
+    "contexts": [
+        "Python is a high-level programming language.",
+        "Pydantic is used for data validation in Python."
+    ],
+    "input_format": "Context: {context}",
+    "output_format": "Question: {question}",
+    "examples": [
+        {"input": "Context: Python is a high-level programming language.", "output": "Question: What type of programming language is Python?"},
+        {"input": "Context: Pydantic is used for data validation in Python.", "output": "Question: What is Pydantic used for in Python?"}
+    ]
+}
+
+# Validate and create the prompt template
+try:
+    prompt_template = QuestionGenerationPrompt(**example_data)
+except ValidationError as e:
+    print("Validation Error:", e)
+
+# Build the prompt
+prompt_string = prompt_template.build_prompt()
+print("Built Prompt:")
+print(prompt_string)
