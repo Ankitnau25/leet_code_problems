@@ -1,51 +1,111 @@
-from pydantic import BaseModel, Field, ValidationError
-from typing import List, Optional
+Here's a refined prompt using the LLaMA 3 prompting template with start and end tokens:
 
-class Example(BaseModel):
-    input: str = Field(..., description="Example input text.")
-    output: str = Field(..., description="Expected output text.")
+*Prompt:*
 
-class QuestionGenerationPrompt(BaseModel):
-    instructions: str = Field(..., description="Instructions for the prompt.")
-    contexts: List[str] = Field(..., description="List of context chunks.")
-    input_format: str = Field(..., description="Format for the input.")
-    output_format: str = Field(..., description="Format for the output.")
-    examples: Optional[List[Example]] = Field([], description="List of input-output examples.")
+`<|startoftext|>Answer the question based on the document: Question: [Insert your specific question here] Document: [Insert the relevant text or paragraphs from the document] Instructions: Read the document and provide a concise answer in 2-3 sentences. Focus on the most relevant information and use specific details from the text to support your answer. <|endofanswer|>`
 
-    def build_prompt(self) -> str:
-        examples_str = "\n".join([f"Input: {ex.input}\nOutput: {ex.output}" for ex in self.examples])
-        contexts_str = "\n".join([f"Context: {ctx}" for ctx in self.contexts])
-        prompt_str = (
-            f"{self.instructions}\n\n"
-            f"Contexts:\n{contexts_str}\n\n"
-            f"Examples:\n{examples_str}\n\n"
-            f"Input: {self.input_format}\n"
-            f"Output: {self.output_format}"
-        )
-        return prompt_str
+*Example:*
 
-# Example data
-example_data = {
-    "instructions": "Generate a question from the following contexts.",
-    "contexts": [
-        "Python is a high-level programming language.",
-        "Pydantic is used for data validation in Python."
-    ],
-    "input_format": "Context: {context}",
-    "output_format": "Question: {question}",
-    "examples": [
-        {"input": "Context: Python is a high-level programming language.", "output": "Question: What type of programming language is Python?"},
-        {"input": "Context: Pydantic is used for data validation in Python.", "output": "Question: What is Pydantic used for in Python?"}
-    ]
-}
+`<|startoftext|>Answer the question based on the document: Question: What are the advantages of using pandas UDFs in data processing? Document: Pandas UDFs allow for efficient data processing, improved performance, and simplified code. They enable users to define custom functions and apply them to data in a flexible and scalable way. Instructions: Read the document and provide a concise answer in 2-3 sentences. Focus on the most relevant information and use specific details from the text to support your answer. <|endofanswer|>`
 
-# Validate and create the prompt template
-try:
-    prompt_template = QuestionGenerationPrompt(**example_data)
-except ValidationError as e:
-    print("Validation Error:", e)
+The `<|startoftext|>` token indicates the start of the prompt, and the `<|endofanswer|>` token indicates where the model should stop generating text. This template helps the model understand the task and generate a response that meets the requirements.
 
-# Build the prompt
-prompt_string = prompt_template.build_prompt()
-print("Built Prompt:")
-print(prompt_string)
+
+Here are the detailed steps for each prompt, along with output formats and two examples in the insurance domain:
+
+*Step 1: Question Generation from Chunks*
+
+_Prompt:_ "Generate a list of questions based on the content of the following text chunk: [insert chunk text]"
+_Steps:_
+1. Read the input text chunk.
+2. Identify key entities, concepts, and relationships.
+3. Generate questions based on the identified information.
+_Output Format:_ List of questions (e.g., ["What is the policyholder's name?", "What is the coverage amount?"])
+_Examples:_
+
+```* Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Questions: ["What is the policyholder's name?", "What is the coverage amount?"]
+* Chunk Text: "The insurance policy covers damages due to natural disasters, such as earthquakes and hurricanes."
+	+ Questions: ["What types of natural disasters are covered?", "What is the scope of coverage?"]
+```
+*Step 2: Answer Generation*
+
+_Prompt:_ "Answer the following question based on the content of the text chunk: [insert question] Document: [insert chunk text]"
+_Steps:_
+1. Read the input question and text chunk.
+2. Identify relevant information in the text chunk.
+3. Generate an answer based on the identified information.
+_Output Format:_ Answer (e.g., "John Doe", "$100,000")
+_Examples:_
+
+```* Question: "What is the policyholder's name?"
+	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Answer: "John Doe"
+* Question: "What is the coverage amount?"
+	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Answer: "$100,000"
+```
+*Step 3: Answer Evaluation*
+
+_Prompt:_ "Evaluate the answer to the following question: [insert question] Answer: [insert answer] Document: [insert chunk text] Identify any missing information or errors in the answer."
+_Steps:_
+1. Read the input question, answer, and text chunk.
+2. Verify the answer against the text chunk.
+3. Identify any missing information or errors.
+_Output Format:_ Evaluation result (e.g., "Correct", "Missing information: policyholder's address")
+_Examples:_
+
+```* Question: "What is the policyholder's name?"
+	+ Answer: "John Doe"
+	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Evaluation: "Correct"
+* Question: "What is the policyholder's address?"
+	+ Answer: "Not mentioned"
+	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Evaluation: "Missing information: policyholder's address"
+```
+Let me know if you'd like me to continue with the remaining steps!
+
+Here are the remaining steps:
+
+_Step 4: Question Filtering and Answer Correction_
+
+_Prompt:_ "Filter out questions without answers or with missing information. Correct answers with missing information based on the content of the text chunk: [insert chunk text]"
+_Steps:_
+1. Evaluate each question and its corresponding answer.
+2. Filter out questions without answers or with missing information.
+3. Correct answers with missing information.
+_Output Format:_ Filtered questions and corrected answers
+_Examples:_
+
+```
+* Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Questions: ["What is the policyholder's name?", "What is the policyholder's address?"]
+	+ Answers: ["John Doe", "Not mentioned"]
+	+ Filtered Questions: ["What is the policyholder's name?"]
+	+ Corrected Answers: ["John Doe"]
+* Chunk Text: "The insurance policy covers damages due to natural disasters, such as earthquakes and hurricanes."
+	+ Questions: ["What types of natural disasters are covered?", "What is the scope of coverage?"]
+	+ Answers: ["earthquakes and hurricanes", "Not mentioned"]
+	+ Filtered Questions: ["What types of natural disasters are covered?"]
+	+ Corrected Answers: ["earthquakes and hurricanes"]
+```
+_Step 5: Ground Truth Generation_
+
+_Prompt:_ "Generate ground truth answers for the following questions based on the content of the text chunk: [insert questions] Document: [insert chunk text]"
+_Steps:_
+1. Read the input questions and text chunk.
+2. Identify relevant information in the text chunk.
+3. Generate ground truth answers.
+_Output Format:_ Ground truth answers
+_Examples:_
+
+```
+* Questions: ["What is the policyholder's name?", "What is the coverage amount?"]
+	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
+	+ Ground Truth Answers: ["John Doe", "$100,000"]
+* Questions: ["What types of natural disasters are covered?", "What is the scope of coverage?"]
+	+ Chunk Text: "The insurance policy covers damages due to natural disasters, such as earthquakes and hurricanes."
+	+ Ground Truth Answers: ["earthquakes and hurricanes", "damages due to natural disasters"]
+```
+These prompts and steps should help you generate high-quality synthetic data for the insurance domain. Remember to adjust them according to your specific needs and the content of your text chunks.
