@@ -111,3 +111,60 @@ _Examples:_
 These prompts and steps should help you generate high-quality synthetic data for the insurance domain. Remember to adjust them according to your specific needs and the content of your text chunks.
 
 You are an expert evaluation system for a question-answering chatbot.You are given the following information:a user querya generated answerrelevant context informationYou may also be given a reference answer to use for reference in your evaluation.Your job is to judge the relevance and correctness of the generated answer based on the context information provided. Output a single score that represents a holistic evaluation. You must return your response in a line with only the score. Do not return answers in any other format. On a separate line provide your reasoning for the score as well.Follow these guidelines for scoring:Your score has to be between 1 and 5, where 1 is the worst and 5 is the best.If the generated answer is not relevant to the user query, you should give a score of 1.If the generated answer is relevant but contains mistakes, you should give a score between 2 and 3.If the generated answer is relevant and fully correct according to the context, you should give a score between 4 and 5.Example Response: 4.0 The generated answer has the exact same metrics as the reference answer, but it is not as concise.
+
+Sure, here's a modified version of the prompt that includes the answer as an input:
+
+---
+
+### Prompt for Scoring Answers
+
+**Question:** [Insert the specific question here]
+
+**Context:** [Insert the relevant context here]
+
+**Answer:** [Insert the provided answer here]
+
+**Instructions:** Rate the provided answer based on the following criteria:
+- **Relevance:** How well does the answer address the question?
+- **Contextual Alignment:** How accurately does the answer reflect the information provided in the context?
+- **Clarity:** Is the answer clear and easy to understand?
+- **Completeness:** Does the answer provide a complete response to the question?
+
+**Scoring:**
+- **1:** The answer is irrelevant, does not align with the context, and is unclear or incomplete.
+- **2:** The answer addresses the question minimally, with some relevance to the context, but lacks clarity or completeness.
+- **3:** The answer is moderately relevant and aligns with the context, but may have minor clarity or completeness issues.
+- **4:** The answer is relevant, aligns well with the context, and is mostly clear and complete.
+- **5:** The answer is highly relevant, perfectly aligns with the context, and is clear and complete.
+
+**Example Scoring:**
+
+**Question:** What is the capital of France?
+
+**Context:** France is a country in Western Europe known for its art, fashion, gastronomy, and culture. Its largest city is also the capital.
+
+**Example Answers and Scores:**
+
+1. **Answer:** Berlin
+   - **Score:** 1
+   - **Explanation:** The answer is incorrect and does not align with the context.
+
+2. **Answer:** A city in Europe
+   - **Score:** 2
+   - **Explanation:** The answer is vague and does not clearly address the question.
+
+3. **Answer:** Paris is a major city in France.
+   - **Score:** 3
+   - **Explanation:** The answer is correct but lacks clarity about it being the capital.
+
+4. **Answer:** Paris is the capital city of France.
+   - **Score:** 4
+   - **Explanation:** The answer is correct and clear, but could include more detail.
+
+5. **Answer:** Paris, the capital city of France, is known for its art, fashion, gastronomy, and culture.
+   - **Score:** 5
+   - **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
+
+---
+
+This template ensures that you can input the answer to be evaluated alongside the question and context, making it easy to systematically score the response.
