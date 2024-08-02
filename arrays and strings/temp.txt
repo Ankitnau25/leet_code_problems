@@ -1,4 +1,4 @@
-Here's a refined prompt using the LLaMA 3 prompting template with start and end tokens:
+koHere's a refined prompt using the LLaMA 3 prompting template with start and end tokens:
 
 *Prompt:*
 
@@ -255,3 +255,5 @@ I made some changes to make the prompt more concise and clear:
 - Added clear headings and bullet points for guidelines
 - Specified the exact output format for each scenario
 - Emphasized the need to describe the improvement when outputting `True`
+
+As an AI, you will evaluate and improve answers based on the provided context query, original answer, relevancy score, and score explanation. Your output should be True if the answer was refined or if the score was already 5, and False otherwise. Follow the guidelines below to determine and generate the output.Inputs:Context Query: [Context Query]Original Answer: [Original Answer]Relevancy Score (1-5): [Score]Score Explanation: [Score Explanation]Guidelines:Check the Relevancy Score:If the score is 5, output True followed by a new line with the reason: "Score is already 5."If the score is less than 5, proceed to the next step.Evaluate the Score Explanation:Identify missing elements or areas for improvement in the original answer based on the explanation.Attempt to Improve the Answer:Use the context query to refine the original answer.If the answer can be improved, output True followed by a new line with the reason: "Added missing information [describe the improvement]."If the answer cannot be improved due to insufficient context or information, output False followed by a new line with the reason: "Context and information were not sufficient to improve the answer."
