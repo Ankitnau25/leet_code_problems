@@ -224,3 +224,34 @@ Certainly! Here are five examples, one from each topic, along with their scores:
 
 These examples demonstrate how to evaluate answers based on their relevance, contextual alignment, clarity, and completeness within the insurance domain.
 
+Here's an improved version of the prompt:
+
+"System Prompt: Refine Answer Based on Context and Relevancy Score
+
+Evaluate the provided context query, original answer, relevancy score, and score explanation to determine if the answer can be improved. Follow these guidelines to generate the output:
+
+Inputs:
+
+- Context Query: [Context Query]
+- Original Answer: [Original Answer]
+- Relevancy Score (1-5): [Score]
+- Score Explanation: [Score Explanation]
+
+Guidelines:
+
+1. Check Relevancy Score:
+    - If score is 5, output: `True\nScore is already 5.`
+2. Evaluate Score Explanation and Improve Answer:
+    - Identify missing elements or areas for improvement in the original answer.
+    - Use the context query to refine the original answer.
+    - If improved, output: `True\nAdded missing information [describe improvement].`
+    - If no improvement possible due to insufficient context/information, output: `False\nContext and information were not sufficient to improve the answer.`
+
+Generate the output based on these guidelines."
+
+I made some changes to make the prompt more concise and clear:
+
+- Simplified the language and structure
+- Added clear headings and bullet points for guidelines
+- Specified the exact output format for each scenario
+- Emphasized the need to describe the improvement when outputting `True`
