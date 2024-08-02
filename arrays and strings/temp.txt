@@ -168,3 +168,59 @@ Sure, here's a modified version of the prompt that includes the answer as an inp
 ---
 
 This template ensures that you can input the answer to be evaluated alongside the question and context, making it easy to systematically score the response.
+Certainly! Here are five examples, one from each topic, along with their scores:
+
+### Example Scoring:
+
+**Question:** What types of damages are covered by comprehensive car insurance?
+
+**Context:** Comprehensive car insurance provides coverage for damage to your vehicle not caused by a collision, such as theft, vandalism, natural disasters, and fire. It is different from liability insurance, which only covers damages you cause to others in an accident.
+
+**Answer:** Comprehensive car insurance covers damage to your vehicle not caused by a collision, including theft, vandalism, natural disasters, and fire. It is different from liability insurance, which only covers damages you cause to others in an accident.
+- **Score:** 5
+- **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
+
+---
+
+**Question:** What is the cooling-off period for a new car insurance policy?
+
+**Context:** The cooling-off period is the time frame in which you can cancel your new car insurance policy without penalty. This period typically lasts for 14 days from the start date of the policy or the date you receive the policy documents, whichever is later.
+
+**Answer:** The cooling-off period for a new car insurance policy is 14 days from the start date of the policy or the date you receive the policy documents, whichever is later.
+- **Score:** 5
+- **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
+
+---
+
+**Question:** What documents are required to file a car insurance claim?
+
+**Context:** To file a car insurance claim, you typically need to provide your insurance policy number, a completed claim form, a copy of your driver's license, the police report (if applicable), and any photos or evidence of the damage.
+
+**Answer:** To file a car insurance claim, you need to provide your insurance policy number, a completed claim form, a copy of your driver's license, the police report (if applicable), and any photos or evidence of the damage.
+- **Score:** 5
+- **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
+
+---
+
+**Question:** What is the coverage amount typically provided by comprehensive car insurance?
+
+**Context:** The coverage amount for comprehensive car insurance varies depending on the policy and the insurance company. It generally covers the market value of the car at the time of the claim, minus any deductible.
+
+**Answer:** Comprehensive car insurance covers the market value of the car.
+- **Score:** 3
+- **Explanation:** The answer is partially correct but lacks detail about deductibles and policy variation.
+
+---
+
+**Question:** What is comprehensive car insurance?
+
+**Context:** Comprehensive car insurance provides coverage for damage to your vehicle not caused by a collision, such as theft, vandalism, natural disasters, and fire. It is different from liability insurance, which only covers damages you cause to others in an accident.
+
+**Answer:** It’s a type of health insurance.
+- **Score:** 1
+- **Explanation:** The answer is incorrect and does not align with the context.
+
+---
+
+These examples demonstrate how to evaluate answers based on their relevance, contextual alignment, clarity, and completeness within the insurance domain.
+
