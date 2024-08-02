@@ -1,259 +1,30 @@
-koHere's a refined prompt using the LLaMA 3 prompting template with start and end tokens:
-
-*Prompt:*
-
-`<|startoftext|>Answer the question based on the document: Question: [Insert your specific question here] Document: [Insert the relevant text or paragraphs from the document] Instructions: Read the document and provide a concise answer in 2-3 sentences. Focus on the most relevant information and use specific details from the text to support your answer. <|endofanswer|>`
-
-*Example:*
-
-`<|startoftext|>Answer the question based on the document: Question: What are the advantages of using pandas UDFs in data processing? Document: Pandas UDFs allow for efficient data processing, improved performance, and simplified code. They enable users to define custom functions and apply them to data in a flexible and scalable way. Instructions: Read the document and provide a concise answer in 2-3 sentences. Focus on the most relevant information and use specific details from the text to support your answer. <|endofanswer|>`
-
-The `<|startoftext|>` token indicates the start of the prompt, and the `<|endofanswer|>` token indicates where the model should stop generating text. This template helps the model understand the task and generate a response that meets the requirements.
-
-
-Here are the detailed steps for each prompt, along with output formats and two examples in the insurance domain:
-
-*Step 1: Question Generation from Chunks*
-
-_Prompt:_ "Generate a list of questions based on the content of the following text chunk: [insert chunk text]"
-_Steps:_
-1. Read the input text chunk.
-2. Identify key entities, concepts, and relationships.
-3. Generate questions based on the identified information.
-_Output Format:_ List of questions (e.g., ["What is the policyholder's name?", "What is the coverage amount?"])
-_Examples:_
-
-```* Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Questions: ["What is the policyholder's name?", "What is the coverage amount?"]
-* Chunk Text: "The insurance policy covers damages due to natural disasters, such as earthquakes and hurricanes."
-	+ Questions: ["What types of natural disasters are covered?", "What is the scope of coverage?"]
-```
-*Step 2: Answer Generation*
-
-_Prompt:_ "Answer the following question based on the content of the text chunk: [insert question] Document: [insert chunk text]"
-_Steps:_
-1. Read the input question and text chunk.
-2. Identify relevant information in the text chunk.
-3. Generate an answer based on the identified information.
-_Output Format:_ Answer (e.g., "John Doe", "$100,000")
-_Examples:_
-
-```* Question: "What is the policyholder's name?"
-	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Answer: "John Doe"
-* Question: "What is the coverage amount?"
-	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Answer: "$100,000"
-```
-*Step 3: Answer Evaluation*
-
-_Prompt:_ "Evaluate the answer to the following question: [insert question] Answer: [insert answer] Document: [insert chunk text] Identify any missing information or errors in the answer."
-_Steps:_
-1. Read the input question, answer, and text chunk.
-2. Verify the answer against the text chunk.
-3. Identify any missing information or errors.
-_Output Format:_ Evaluation result (e.g., "Correct", "Missing information: policyholder's address")
-_Examples:_
-
-```* Question: "What is the policyholder's name?"
-	+ Answer: "John Doe"
-	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Evaluation: "Correct"
-* Question: "What is the policyholder's address?"
-	+ Answer: "Not mentioned"
-	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Evaluation: "Missing information: policyholder's address"
-```
-Let me know if you'd like me to continue with the remaining steps!
-
-Here are the remaining steps:
-
-_Step 4: Question Filtering and Answer Correction_
-
-_Prompt:_ "Filter out questions without answers or with missing information. Correct answers with missing information based on the content of the text chunk: [insert chunk text]"
-_Steps:_
-1. Evaluate each question and its corresponding answer.
-2. Filter out questions without answers or with missing information.
-3. Correct answers with missing information.
-_Output Format:_ Filtered questions and corrected answers
-_Examples:_
-
-```
-* Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Questions: ["What is the policyholder's name?", "What is the policyholder's address?"]
-	+ Answers: ["John Doe", "Not mentioned"]
-	+ Filtered Questions: ["What is the policyholder's name?"]
-	+ Corrected Answers: ["John Doe"]
-* Chunk Text: "The insurance policy covers damages due to natural disasters, such as earthquakes and hurricanes."
-	+ Questions: ["What types of natural disasters are covered?", "What is the scope of coverage?"]
-	+ Answers: ["earthquakes and hurricanes", "Not mentioned"]
-	+ Filtered Questions: ["What types of natural disasters are covered?"]
-	+ Corrected Answers: ["earthquakes and hurricanes"]
-```
-_Step 5: Ground Truth Generation_
-
-_Prompt:_ "Generate ground truth answers for the following questions based on the content of the text chunk: [insert questions] Document: [insert chunk text]"
-_Steps:_
-1. Read the input questions and text chunk.
-2. Identify relevant information in the text chunk.
-3. Generate ground truth answers.
-_Output Format:_ Ground truth answers
-_Examples:_
-
-```
-* Questions: ["What is the policyholder's name?", "What is the coverage amount?"]
-	+ Chunk Text: "The policyholder, John Doe, has a coverage amount of $100,000."
-	+ Ground Truth Answers: ["John Doe", "$100,000"]
-* Questions: ["What types of natural disasters are covered?", "What is the scope of coverage?"]
-	+ Chunk Text: "The insurance policy covers damages due to natural disasters, such as earthquakes and hurricanes."
-	+ Ground Truth Answers: ["earthquakes and hurricanes", "damages due to natural disasters"]
-```
-These prompts and steps should help you generate high-quality synthetic data for the insurance domain. Remember to adjust them according to your specific needs and the content of your text chunks.
-
-You are an expert evaluation system for a question-answering chatbot.You are given the following information:a user querya generated answerrelevant context informationYou may also be given a reference answer to use for reference in your evaluation.Your job is to judge the relevance and correctness of the generated answer based on the context information provided. Output a single score that represents a holistic evaluation. You must return your response in a line with only the score. Do not return answers in any other format. On a separate line provide your reasoning for the score as well.Follow these guidelines for scoring:Your score has to be between 1 and 5, where 1 is the worst and 5 is the best.If the generated answer is not relevant to the user query, you should give a score of 1.If the generated answer is relevant but contains mistakes, you should give a score between 2 and 3.If the generated answer is relevant and fully correct according to the context, you should give a score between 4 and 5.Example Response: 4.0 The generated answer has the exact same metrics as the reference answer, but it is not as concise.
-
-Sure, here's a modified version of the prompt that includes the answer as an input:
+Sure, here's the refined prompt with the specified output format:
 
 ---
 
-### Prompt for Scoring Answers
+**System Prompt:**
 
-**Question:** [Insert the specific question here]
+As an AI, you will evaluate and improve answers based on the provided context query, original answer, relevancy score, and score explanation. Your output should be `True` if the answer was refined or if the score was already 5, and `False` otherwise. Follow the guidelines below to determine and generate the output.
 
-**Context:** [Insert the relevant context here]
+**Inputs:**
+1. **Context Query:** [Context Query]
+2. **Original Answer:** [Original Answer]
+3. **Relevancy Score (1-5):** [Score]
+4. **Score Explanation:** [Score Explanation]
 
-**Answer:** [Insert the provided answer here]
+**Guidelines:**
+1. **Check the Relevancy Score:**
+   - If the score is 5, output `True` followed by a new line with the reason: "Score is already 5."
+   - If the score is less than 5, proceed to the next step.
 
-**Instructions:** Rate the provided answer based on the following criteria:
-- **Relevance:** How well does the answer address the question?
-- **Contextual Alignment:** How accurately does the answer reflect the information provided in the context?
-- **Clarity:** Is the answer clear and easy to understand?
-- **Completeness:** Does the answer provide a complete response to the question?
+2. **Evaluate the Score Explanation:**
+   - Identify missing elements or areas for improvement in the original answer based on the explanation.
 
-**Scoring:**
-- **1:** The answer is irrelevant, does not align with the context, and is unclear or incomplete.
-- **2:** The answer addresses the question minimally, with some relevance to the context, but lacks clarity or completeness.
-- **3:** The answer is moderately relevant and aligns with the context, but may have minor clarity or completeness issues.
-- **4:** The answer is relevant, aligns well with the context, and is mostly clear and complete.
-- **5:** The answer is highly relevant, perfectly aligns with the context, and is clear and complete.
-
-**Example Scoring:**
-
-**Question:** What is the capital of France?
-
-**Context:** France is a country in Western Europe known for its art, fashion, gastronomy, and culture. Its largest city is also the capital.
-
-**Example Answers and Scores:**
-
-1. **Answer:** Berlin
-   - **Score:** 1
-   - **Explanation:** The answer is incorrect and does not align with the context.
-
-2. **Answer:** A city in Europe
-   - **Score:** 2
-   - **Explanation:** The answer is vague and does not clearly address the question.
-
-3. **Answer:** Paris is a major city in France.
-   - **Score:** 3
-   - **Explanation:** The answer is correct but lacks clarity about it being the capital.
-
-4. **Answer:** Paris is the capital city of France.
-   - **Score:** 4
-   - **Explanation:** The answer is correct and clear, but could include more detail.
-
-5. **Answer:** Paris, the capital city of France, is known for its art, fashion, gastronomy, and culture.
-   - **Score:** 5
-   - **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
+3. **Attempt to Improve the Answer:**
+   - Use the context query to refine the original answer.
+   - If the answer can be improved, output `True` followed by a new line with the reason: "Added missing information [describe the improvement]."
+   - If the answer cannot be improved due to insufficient context or information, output `False` followed by a new line with the reason: "Context and information were not sufficient to improve the answer."
 
 ---
 
-This template ensures that you can input the answer to be evaluated alongside the question and context, making it easy to systematically score the response.
-Certainly! Here are five examples, one from each topic, along with their scores:
-
-### Example Scoring:
-
-**Question:** What types of damages are covered by comprehensive car insurance?
-
-**Context:** Comprehensive car insurance provides coverage for damage to your vehicle not caused by a collision, such as theft, vandalism, natural disasters, and fire. It is different from liability insurance, which only covers damages you cause to others in an accident.
-
-**Answer:** Comprehensive car insurance covers damage to your vehicle not caused by a collision, including theft, vandalism, natural disasters, and fire. It is different from liability insurance, which only covers damages you cause to others in an accident.
-- **Score:** 5
-- **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
-
----
-
-**Question:** What is the cooling-off period for a new car insurance policy?
-
-**Context:** The cooling-off period is the time frame in which you can cancel your new car insurance policy without penalty. This period typically lasts for 14 days from the start date of the policy or the date you receive the policy documents, whichever is later.
-
-**Answer:** The cooling-off period for a new car insurance policy is 14 days from the start date of the policy or the date you receive the policy documents, whichever is later.
-- **Score:** 5
-- **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
-
----
-
-**Question:** What documents are required to file a car insurance claim?
-
-**Context:** To file a car insurance claim, you typically need to provide your insurance policy number, a completed claim form, a copy of your driver's license, the police report (if applicable), and any photos or evidence of the damage.
-
-**Answer:** To file a car insurance claim, you need to provide your insurance policy number, a completed claim form, a copy of your driver's license, the police report (if applicable), and any photos or evidence of the damage.
-- **Score:** 5
-- **Explanation:** The answer is correct, clear, complete, and aligns well with the context provided.
-
----
-
-**Question:** What is the coverage amount typically provided by comprehensive car insurance?
-
-**Context:** The coverage amount for comprehensive car insurance varies depending on the policy and the insurance company. It generally covers the market value of the car at the time of the claim, minus any deductible.
-
-**Answer:** Comprehensive car insurance covers the market value of the car.
-- **Score:** 3
-- **Explanation:** The answer is partially correct but lacks detail about deductibles and policy variation.
-
----
-
-**Question:** What is comprehensive car insurance?
-
-**Context:** Comprehensive car insurance provides coverage for damage to your vehicle not caused by a collision, such as theft, vandalism, natural disasters, and fire. It is different from liability insurance, which only covers damages you cause to others in an accident.
-
-**Answer:** It’s a type of health insurance.
-- **Score:** 1
-- **Explanation:** The answer is incorrect and does not align with the context.
-
----
-
-These examples demonstrate how to evaluate answers based on their relevance, contextual alignment, clarity, and completeness within the insurance domain.
-
-Here's an improved version of the prompt:
-
-"System Prompt: Refine Answer Based on Context and Relevancy Score
-
-Evaluate the provided context query, original answer, relevancy score, and score explanation to determine if the answer can be improved. Follow these guidelines to generate the output:
-
-Inputs:
-
-- Context Query: [Context Query]
-- Original Answer: [Original Answer]
-- Relevancy Score (1-5): [Score]
-- Score Explanation: [Score Explanation]
-
-Guidelines:
-
-1. Check Relevancy Score:
-    - If score is 5, output: `True\nScore is already 5.`
-2. Evaluate Score Explanation and Improve Answer:
-    - Identify missing elements or areas for improvement in the original answer.
-    - Use the context query to refine the original answer.
-    - If improved, output: `True\nAdded missing information [describe improvement].`
-    - If no improvement possible due to insufficient context/information, output: `False\nContext and information were not sufficient to improve the answer.`
-
-Generate the output based on these guidelines."
-
-I made some changes to make the prompt more concise and clear:
-
-- Simplified the language and structure
-- Added clear headings and bullet points for guidelines
-- Specified the exact output format for each scenario
-- Emphasized the need to describe the improvement when outputting `True`
-
-As an AI, you will evaluate and improve answers based on the provided context query, original answer, relevancy score, and score explanation. Your output should be True if the answer was refined or if the score was already 5, and False otherwise. Follow the guidelines below to determine and generate the output.Inputs:Context Query: [Context Query]Original Answer: [Original Answer]Relevancy Score (1-5): [Score]Score Explanation: [Score Explanation]Guidelines:Check the Relevancy Score:If the score is 5, output True followed by a new line with the reason: "Score is already 5."If the score is less than 5, proceed to the next step.Evaluate the Score Explanation:Identify missing elements or areas for improvement in the original answer based on the explanation.Attempt to Improve the Answer:Use the context query to refine the original answer.If the answer can be improved, output True followed by a new line with the reason: "Added missing information [describe the improvement]."If the answer cannot be improved due to insufficient context or information, output False followed by a new line with the reason: "Context and information were not sufficient to improve the answer."
+Would you like to proceed with this format?
