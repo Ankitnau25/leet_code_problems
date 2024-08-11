@@ -1,30 +1,74 @@
-Sure, here's the refined prompt with the specified output format:
 
----
 
-**System Prompt:**
+*Synthetic Data Generation*
 
-As an AI, you will evaluate and improve answers based on the provided context query, original answer, relevancy score, and score explanation. Your output should be `True` if the answer was refined or if the score was already 5, and `False` otherwise. Follow the guidelines below to determine and generate the output.
+*Project Overview*
 
-**Inputs:**
-1. **Context Query:** [Context Query]
-2. **Original Answer:** [Original Answer]
-3. **Relevancy Score (1-5):** [Score]
-4. **Score Explanation:** [Score Explanation]
+Synthetic Data Generation is a versatile tool for generating datasets for various problems. Currently, the project has been utilized specifically for generating rag data, with plans to expand its capabilities to include reranking in the future.
 
-**Guidelines:**
-1. **Check the Relevancy Score:**
-   - If the score is 5, output `True` followed by a new line with the reason: "Score is already 5."
-   - If the score is less than 5, proceed to the next step.
+*Project Details*
 
-2. **Evaluate the Score Explanation:**
-   - Identify missing elements or areas for improvement in the original answer based on the explanation.
+- The project is primarily used to generate synthetic datasets for:
+    - RAG (Retrieval-Augmented Generation) models
+    - Reranking models
+    - Embeddings models
+- Currently, the project has been implemented for generating RAG data
 
-3. **Attempt to Improve the Answer:**
-   - Use the context query to refine the original answer.
-   - If the answer can be improved, output `True` followed by a new line with the reason: "Added missing information [describe the improvement]."
-   - If the answer cannot be improved due to insufficient context or information, output `False` followed by a new line with the reason: "Context and information were not sufficient to improve the answer."
+*Approach*
 
----
+Our approach for generating RAG data involves the following steps:
 
-Would you like to proceed with this format?
+1. *Question Generation*: Generate questions using a Large Language Model (LLM) given a chunk of documents. The generated data is based on the input documents.
+2. *Chunk Expansion*: Add related chunks to the initial chunk using Databricks Vector Search to increase the context.
+3. *Answer Generation*: Send the question and expanded chunk to an answer generation model.
+4. *Evaluation*: Evaluate the generated answer using Critique LLM by defining a custom evaluation matrix in MLflow. This provides a score and explanation.
+5. *Answer Refining*: Refine the answer based on the evaluation explanation using the same Critique LLM.
+
+*Running the Project*
+
+1. Clone the repository to your Databricks workspace.
+2. Run the `preprocessing` notebook to chunk the documents and save them to a Delta table.
+3. Update the vector search index with the chunked documents.
+4. Configure the environment variables (`env`) with the necessary details, such as search table information and other configs.
+5. Run the `rag_generation` notebook to execute the RAG data generation approach.
+
+*Custom Prompts*
+
+Custom prompts can be generated for the following stages:
+
+- Question Generation
+- Answer Generation
+- Refinement
+
+You can define custom prompts by creating a `Prompt` object and passing it to the corresponding stage in the `Workflow` object.
+
+```
+from prompt import Prompt
+from workflow import Workflow
+
+# Define custom prompts
+question_prompt = Prompt("Your custom question prompt here")
+answer_prompt = Prompt("Your custom answer prompt here")
+refine_prompt = Prompt("Your custom refinement prompt here")
+
+# Create a Workflow object with custom prompts
+workflow = Workflow(
+    question_prompt=question_prompt,
+    answer_prompt=answer_prompt,
+    refine_prompt=refine_prompt
+)
+```
+
+*Models*
+
+Models can be defined using the `LlamaIndex` Databricks wrapper, which allows loading any model from a Databricks endpoint.
+
+```
+from llamaindex import LlamaIndex
+
+# Define a model
+model = LlamaIndex(
+    model_name="your_model_name",
+    endpoint="your_databricks_endpoint"
+)
+``
