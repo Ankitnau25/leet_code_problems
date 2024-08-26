@@ -1,0 +1,16 @@
+models:
+  microsoft/Phi-3.5-mini-instruct:
+    model_id: "microsoft/Phi-3-mini-4k-instruct"  # Pre-trained model identifier from Hugging Face
+    model_name: "microsoft/Phi-3.5-mini-instruct"  # Model name for loading from Hugging Face
+    dataset_name: "username/dataset"  # Dataset identifier from Hugging Face
+    dataset_split: "train"  # Dataset split to use for fine-tuning
+    new_model: "new-model-name"  # Name of the fine-tuned model
+    hf_model_repo: "username/new-model-name"  # Hugging Face repository identifier for saving the fine-tuned model
+    dependencies:
+      - transformers
+      - datasets
+      - peft 
+      - accelerate
+      - bitsandbytes
+      - trl
+      - flash_attn
