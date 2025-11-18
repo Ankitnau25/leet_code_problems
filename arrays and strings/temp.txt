@@ -1,74 +1,66 @@
+ansal
 
 
-*Synthetic Data Generation*
+Calculator build and deploy for databrciks
+⁃ I table migration script ran for Emily squad
+⁃ Helped team for downloading new Hugging face opensource models
 
-*Project Overview*
 
-Synthetic Data Generation is a versatile tool for generating datasets for various problems. Currently, the project has been utilized specifically for generating rag data, with plans to expand its capabilities to include reranking in the future.
+Amiya Mandal
 
-*Project Details*
 
-- The project is primarily used to generate synthetic datasets for:
-    - RAG (Retrieval-Augmented Generation) models
-    - Reranking models
-    - Embeddings models
-- Currently, the project has been implemented for generating RAG data
+Ankit Nautiyal
 
-*Approach*
 
-Our approach for generating RAG data involves the following steps:
+Suvojit Hoce
 
-1. *Question Generation*: Generate questions using a Large Language Model (LLM) given a chunk of documents. The generated data is based on the input documents.
-2. *Chunk Expansion*: Add related chunks to the initial chunk using Databricks Vector Search to increase the context.
-3. *Answer Generation*: Send the question and expanded chunk to an answer generation model.
-4. *Evaluation*: Evaluate the generated answer using Critique LLM by defining a custom evaluation matrix in MLflow. This provides a score and explanation.
-5. *Answer Refining*: Refine the answer based on the evaluation explanation using the same Critique LLM.
 
-*Running the Project*
+Project: Master Agent for Master Orchestrator
 
-1. Clone the repository to your Databricks workspace.
-2. Run the `preprocessing` notebook to chunk the documents and save them to a Delta table.
-3. Update the vector search index with the chunked documents.
-4. Configure the environment variables (`env`) with the necessary details, such as search table information and other configs.
-5. Run the `rag_generation` notebook to execute the RAG data generation approach.
 
-*Custom Prompts*
+CCT
 
-Custom prompts can be generated for the following stages:
 
-- Question Generation
-- Answer Generation
-- Refinement
+Key Highlights for the past month
+Initial project plan and architecture
+created synthetic data for the project
+tested sample agents for the project using agent toolkit
+started working on phase 1 of master agent
 
-You can define custom prompts by creating a `Prompt` object and passing it to the corresponding stage in the `Workflow` object.
 
-```
-from prompt import Prompt
-from workflow import Workflow
+Deepak Sahu
 
-# Define custom prompts
-question_prompt = Prompt("Your custom question prompt here")
-answer_prompt = Prompt("Your custom answer prompt here")
-refine_prompt = Prompt("Your custom refinement prompt here")
 
-# Create a Workflow object with custom prompts
-workflow = Workflow(
-    question_prompt=question_prompt,
-    answer_prompt=answer_prompt,
-    refine_prompt=refine_prompt
-)
-```
+Explored feature of UiPath. Created toy implmentation to undenstand the agentic evaluation options available
+Evaluated the data privacy and usage terms offered by UiPath for the out-of-box avail agent tools.
+Currently finding the ways to implement orchestrator agent Side exploration in progress also includes UiPath's IXP
 
-*Models*
 
-Models can be defined using the `LlamaIndex` Databricks wrapper, which allows loading any model from a Databricks endpoint.
+n z8. Co|1
 
-```
-from llamaindex import LlamaIndex
 
-# Define a model
-model = LlamaIndex(
-    model_name="your_model_name",
-    endpoint="your_databricks_endpoint"
-)
-``
+849 characte
+
+
+ESC
+Ox
+F1
+P
+F3
+F4
+F5
+F6
+Prtse
+F7
+F8
+#
+$
+%
+&
+2
+3
+5 €
+6
+W
+E
+R
