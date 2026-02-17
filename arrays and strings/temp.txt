@@ -1,66 +1,15 @@
-ansal
+I would like to share my assessment regarding the use of Physics-Informed AI (specifically Physics-Informed Neural Networks – PINNs) for banking use cases.
 
+Physics-Informed Neural Networks are designed for problems where two things are required:
 
-Calculator build and deploy for databrciks
-⁃ I table migration script ran for Emily squad
-⁃ Helped team for downloading new Hugging face opensource models
+Observational data, and
 
+Known governing mathematical or physical laws (typically differential equations).
 
-Amiya Mandal
+These models incorporate the known equations directly into the training process so that predictions not only fit the data but also strictly follow those laws. This approach is mainly used in engineering, physics simulations, and other scientific domains where such governing equations clearly exist.
 
+In the banking domain, however, most AI use cases—such as credit risk modeling, fraud detection, customer segmentation, and marketing analytics—are behavioral and data-driven problems. They are not governed by fixed physical or mathematical laws that can be embedded into a physics-based loss function. Without such governing equations, the core advantage of Physics-Informed Neural Networks cannot be utilized.
 
-Ankit Nautiyal
+I also reviewed publicly available research implementations and GitHub repositories to understand real-world adoption. I did not find practical examples where Physics-Informed Neural Networks have been successfully applied to mainstream retail or commercial banking AI problems. Current applications appear limited to scientific computing and some highly specialized quantitative finance areas.
 
-
-Suvojit Hoce
-
-
-Project: Master Agent for Master Orchestrator
-
-
-CCT
-
-
-Key Highlights for the past month
-Initial project plan and architecture
-created synthetic data for the project
-tested sample agents for the project using agent toolkit
-started working on phase 1 of master agent
-
-
-Deepak Sahu
-
-
-Explored feature of UiPath. Created toy implmentation to undenstand the agentic evaluation options available
-Evaluated the data privacy and usage terms offered by UiPath for the out-of-box avail agent tools.
-Currently finding the ways to implement orchestrator agent Side exploration in progress also includes UiPath's IXP
-
-
-n z8. Co|1
-
-
-849 characte
-
-
-ESC
-Ox
-F1
-P
-F3
-F4
-F5
-F6
-Prtse
-F7
-F8
-#
-$
-%
-&
-2
-3
-5 €
-6
-W
-E
-R
+Based on both theoretical requirements and current industry practice, Physics-Informed AI does not appear to be a suitable or value-adding approach for general banking use cases.
